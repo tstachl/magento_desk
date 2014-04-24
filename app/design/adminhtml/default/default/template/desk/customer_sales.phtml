@@ -1,0 +1,80 @@
+<?php
+/**
+ * Desk
+ *
+ * LICENSE
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/MIT
+ *
+ * @category   Desk
+ * @package    Desk_Integration
+ * @copyright  Copyright (c) 2013-2014 Salesforce.com Inc. (http://www.salesforce.com)
+ */
+?>
+<?php
+/**
+ * Template for Customer
+ */
+?>
+<div class="detail">
+  <h3><?php echo $this->__('Sales Statistics'); ?></h3>
+  <table>
+    <thead>
+      <tr>
+        <th><?php echo Mage::helper('customer')->__('Website') ?></th>
+        <th><?php echo Mage::helper('customer')->__('Store') ?></th>
+        <th><?php echo Mage::helper('customer')->__('Store View') ?></th>
+        <th><?php echo Mage::helper('customer')->__('Lifetime Sales') ?></th>
+        <th><?php echo Mage::helper('customer')->__('Average Sale') ?></th>
+      </tr>
+    </thead>
+    <tfoot>
+      <tr>
+        <td colspan="3">
+          <strong><?php echo Mage::helper('customer')->__('All Store Views') ?></strong>
+        </td>
+        <td>
+          <strong><?php echo $this->formatCurrency($this->getTotals()->getBaseLifetime()) ?></strong>
+        </td>
+        <td>
+          <strong><?php echo $this->formatCurrency($this->getTotals()->getAvgsale()) ?></strong>
+        </td>
+      </tr>
+    </tfoot>
+    <tbody>
+      <?php if ($this->getRows()): ?>
+        <?php $_i = 0; ?>
+          <?php foreach ($this->getRows() as $_websiteId => $_groups): ?>
+          <?php $_websiteRow = false; ?>
+            <?php foreach ($_groups as $_groupId => $_stores): ?>
+            <?php $_groupRow = false; ?>
+              <?php foreach ($_stores as $_row): ?>
+                <?php if ($_row->getStoreId() == 0): ?>
+                  <td colspan="3" class="label"><?php echo $_row->getStoreName() ?></td>
+                <?php else: ?>
+                  <tr<?php echo ($_i++ % 2 ? ' class="even"' : '') ?>>
+                  <?php if (!$_websiteRow): ?>
+                    <td rowspan="<?php echo $this->getWebsiteCount($_websiteId) ?>"><?php echo $_row->getWebsiteName() ?></td>
+                    <?php $_websiteRow = true; ?>
+                  <?php endif; ?>
+                  <?php if (!$_groupRow): ?>
+                    <td rowspan="<?php echo count($_stores) ?>"><?php echo $_row->getGroupName() ?></td>
+                    <?php $_groupRow = true; ?>
+                  <?php endif; ?>
+                  <td><?php echo $_row->getStoreName() ?></td>
+                <?php endif; ?>
+                <td><?php echo $this->formatCurrency($_row->getLifetime(), $_row->getWebsiteId()) ?></td>
+                <td><?php echo $this->formatCurrency($_row->getAvgsale(), $_row->getWebsiteId()) ?></td>
+              </tr>
+            <?php endforeach; ?>
+          <?php endforeach; ?>
+        <?php endforeach; ?>
+      <?php else: ?>
+        <tr><td colspan="5"></td></tr>
+      <?php endif; ?>
+    </tbody>
+  </table>
+</div>

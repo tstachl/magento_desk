@@ -1,0 +1,59 @@
+<?php
+/**
+ * Desk
+ *
+ * LICENSE
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/MIT
+ *
+ * @category   Desk
+ * @package    Desk_Widget
+ * @copyright  Copyright (c) 2013-2014 Salesforce.com Inc. (http://www.salesforce.com)
+ */
+?>
+<table>
+  <tbody>
+    <tr>
+      <th><?php echo $this->__('Email') ?></th>
+      <td><?php echo $this->getCustomer()->getEmail() ?></td>
+    </tr>
+    <tr>
+      <th><?php echo $this->__('Group') ?></th>
+      <td><?php echo $this->getGroup()->getCode() ?></td>
+    </tr>
+    <?php if($this->getAddress()): ?>
+      <tr>
+        <th><?php echo $this->__('Telephone') ?></th>
+        <td><?php echo $this->getAddress()->getTelephone() ?></td>
+      </tr>
+      <tr>
+        <th><?php echo $this->__('ZIP') ?></th>
+        <td><?php echo $this->getAddress()->getPostcode() ?></td>
+      </tr>
+      <tr>
+        <th><?php echo $this->__('Country') ?></th>
+        <td><?php echo $this->getAddress()->getCountry() ?></td>
+      </tr>
+      <tr>
+        <th><?php echo $this->__('State') ?></th>
+        <td><?php echo $this->getAddress()->getRegion() ?></td>
+      </tr>
+    <?php else: ?>
+      <tr>
+        <th><?php echo $this->__('Billing Address') ?></th>
+        <td><?php echo $this->__('The customer does not have default billing address.') ?></td>
+      </tr>
+    <?php endif; ?>
+    <tr>
+      <th><?php echo $this->__('Customer Since') ?></th>
+      <td><?php echo date("m/j/Y", $this->getCustomer()->getCreatedAtTimestamp()) ?></td>
+    </tr>
+    <tr>
+      <th><?php echo $this->__('Website') ?></th>
+      <td><?php echo $this->getWebsite()->getName() ?></td>
+    </tr>
+  </tbody>
+</table>

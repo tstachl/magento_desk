@@ -1,0 +1,19 @@
+<div class="desk-search">
+  <form action="" type="post" class="desk-search-header">
+    <input type="text" class="desk-search-input" name="q" placeholder="<?php echo $this->__('Enter a search term ...') ?>" value="<?php echo $this->getQuery() ?>" />
+    <input type="submit" class="desk-search-button" value="<?php echo $this->__('Search') ?>" />
+  </form>
+  <div class="desk-search-body">
+    <div class="desk-search-meta">
+      <strong><?php echo $this->__($this->getText(), $this->getResult()->getSize()) ?></strong>
+    </div>
+    <?php if ($this->getResult()): ?>
+      <?php foreach ($this->getResult() as $item): ?>
+        <?php echo $item->getFirstname() ?>
+        <?php echo $item->getLastname() ?>
+      <?php endforeach; ?>
+    <?php else: ?>
+      <p class="desk-search-warning"><?php echo $this->__('The search did\'t return a result.') ?>.</p>
+    <?php endif; ?>
+  </div>
+</div>

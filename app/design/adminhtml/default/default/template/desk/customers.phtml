@@ -1,0 +1,53 @@
+<?php
+/**
+ * Desk
+ *
+ * LICENSE
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/MIT
+ *
+ * @category   Desk
+ * @package    Desk_Integration
+ * @copyright  Copyright (c) 2013-2014 Salesforce.com Inc. (http://www.salesforce.com)
+ */
+?>
+<?php
+/**
+ * Template for Customer list
+ */
+?>
+<div class="widget" data-origin="<?php echo $this->helper('desk_integration')->getEndpoint() ?>" data-collapsible="true">
+  <h3><?php echo $this->__('Customers (%d)', $this->getCustomers()->getSize()) ?></h3>
+  <div class="widget-body" style="display: none;">
+    <?php if($this->getCustomers()->getSize()): ?>
+      <table>
+        <thead>
+          <tr>
+            <th><?php echo $this->__('First Name') ?></th>
+            <th><?php echo $this->__('Last Name') ?></th>
+            <th><?php echo $this->__('Email') ?></th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php foreach ($this->getCustomers() as $customer): ?>
+            <tr>
+              <td><?php echo $customer->getFirstname() ?></td>
+              <td><?php echo $customer->getLastname() ?></td>
+              <td><?php echo $customer->getEmail() ?></td>
+              <td>
+                <a data-action="select" data-id="<?php echo $customer->getId() ?>" href="<?php echo $this->helper('desk_integration')->getCustomerUrl($customer->getId()) ?>">
+                  <?php echo $this->__('Select') ?>
+                </a>
+              </td>
+            </tr>
+          <?php endforeach ?>
+        </tbody
+      </table>
+    <?php else: ?>
+      <p><?php echo $this->__('No customer found.') ?></p>
+    <?php endif; ?>
+  </div>
+</div>

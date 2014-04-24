@@ -1,0 +1,51 @@
+<?php
+/**
+ * Desk
+ *
+ * LICENSE
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/MIT
+ *
+ * @category   Desk
+ * @package    Desk_Integration
+ * @copyright  Copyright (c) 2013-2014 Salesforce.com Inc. (http://www.salesforce.com)
+ */
+?>
+<?php
+/**
+ * Template for Orders list
+ */
+?>
+<?php if($this->getCollection()->getSize()): ?>
+  <table>
+    <thead>
+      <tr>
+        <th><?php echo $this->__('Order #') ?></th>
+        <th><?php echo $this->__('Date') ?></th>
+        <th><?php echo $this->__('Total') ?></th>
+        <th><?php echo $this->__('Status') ?></th>
+        <th><?php echo $this->__('Details') ?></th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php foreach ($this->getCollection() as $order): ?>
+        <tr>
+          <td><?php echo $order->getRealOrderId() ?></td>
+          <td><?php echo date("m/j/Y", strtotime($order->getCreatedAt())) ?></td>
+          <td><?php echo $this->getPriceFormatted($order->getGrandTotal()) ?></td>
+          <td><?php echo $order->getStatus() ?></td>
+          <td>
+            <a data-action="modal" title="<?php echo $this->__('View Order %s', $order->getRealOrderId()) ?>" href="<?php echo $this->getRowUrl($order) ?>">
+              <?php echo $this->__('View Order') ?>
+            </a>
+          </td>
+        </tr>
+      <?php endforeach ?>
+    </tbody
+  </table>
+<?php else: ?>
+  <p><?php echo $this->__('This customer has not placed any orders yet.') ?></p>
+<?php endif; ?>

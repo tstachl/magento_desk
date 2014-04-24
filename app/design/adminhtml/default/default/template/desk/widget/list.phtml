@@ -1,0 +1,37 @@
+<?php
+/**
+ * Desk
+ *
+ * LICENSE
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/MIT
+ *
+ * @category   Desk
+ * @package    Desk_Widget
+ * @copyright  Copyright (c) 2013-2014 Salesforce.com Inc. (http://www.salesforce.com)
+ */
+?>
+<div id="desk-widget-list" data-origin="<?php echo $this->getOrigin() ?>">
+  <?php if ($this->getWidgetCollection()): ?>
+    <?php foreach ($this->getWidgetCollection() as $widget): ?>
+      <div id="<?php echo $widget->getId() ?>" class="desk-widget<?php echo $widget->getCollapsedClass() ?>">
+        <h3>
+          <?php echo $widget->getHeaderText() ?>
+          <span class="desk-widget-links">
+            <?php if ($widget->getLinks()): ?>
+              <?php foreach ($widget->getLinks() as $link): ?>
+                <?php echo $link->toHtml() ?>
+              <?php endforeach; ?>
+            <?php endif; ?>
+          </span>
+        </h3>
+        <div class="desk-widget-body">
+          <?php echo $widget->toHtml() ?>
+        </div>
+      </div>
+    <?php endforeach; ?>
+  <?php endif; ?>
+</div>
