@@ -21,6 +21,13 @@
  */
 class Desk_General_Model_Validation_Token extends Mage_Core_Model_Config_Data
 {
+
+  /**
+   * Overrides the save method and makes sure the API credentials are valid.
+   *   Note: It only validates if all values are given!
+   *
+   * @return Mage_Core_Model_Abstract
+   */
   public function save()
   {
     $fields   = $this->groups['general']['fields'];

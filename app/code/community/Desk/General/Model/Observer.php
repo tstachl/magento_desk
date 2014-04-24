@@ -21,8 +21,10 @@
  */
 class Desk_General_Model_Observer
 {
+
   /**
-   * Add a new button next to the existing "Save and Continue Edit" button
+   * Add a user sync button next to the existing "Save and Continue Edit"
+   * button, but only if we are in the desk.com section
    *
    * @return void
    */

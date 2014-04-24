@@ -21,6 +21,7 @@
  */
 class Desk_General_Helper_Data extends Mage_Core_Helper_Abstract
 {
+
   /**
    * Path to store the endpoint
    *
